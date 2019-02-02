@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Finder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center mb-5">Restaurant Finder</h2>
+            <ul class="nav nav-fill">
+                <a class="nav-item" href="#addRestaurant">Add a new restaurant</a>
+                <a class="nav-item" href="#updateRestaurant">Update a restaurant</a>
+                <a class="nav-item" href="#deleteRestaurant">Delete a restaurant</a>
+                <a class="nav-item" href="#searchRestaurant">Search restaurants</a>
+            </ul>
+            <hr class="mb-5">
+
+            <p>
+                <% if( msg !== undefined && msg !== ''){ %>
+                    last result: <br> &nbsp <%= msg %>
+                <% } %>
+            </p>
+
+            <div class="row">
+                <div class="offset-md-2 col-md-8 offset-md-2">
+                    <span class="anchor" id="addRestaurant"></span>
+
+                    <div class="card card-outline-secondary">
+
+                        <div class="card-header">
+                            <h3 class="mb-0">Add Restaurant</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <form class="form" role="form" autocomplete="off" id="addRestaurantForm" novalidate=""
+                                  method="POST" action="/create">
+
+
+                                <div class="form-group">
+                                    <label for="addName">Name</label>
+                                    <input type="text" class="form-control" name="name" id="addName" required="">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="addCity">City</label>
+                                    <input type="text" class="form-control" name="city" id="addCity" required="">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="addCountry">Country</label>
+                                    <input type="text" class="form-control" name="country" id="addCountry" required="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="addRate">Rate</label>
+                                    <input type="text" class="form-control" name="rate" id="addRate"
+                                           required="">
+                                </div>
+
+
+                                <br>
+
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Cuisine Type:</label>
+                                    <div class="col-lg-9">
+                                        <select id="addCuisine" class="form-control" name="cuisine" size="0">
+                                            <option value="kebab">Kebab</option>
+                                            <option value="fastFood">Fast Food</option>
+                                            <option value="chinese">Chinese</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <br>
+
+
+                                <div class="form-group">
+                                    <label for="addPhone">Phone Number</label>
+                                    <input type="text" class="form-control" name="phone" id="addPhone" required="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="addAddress">Address</label>
+                                    <input type="text" class="form-control" name="address" id="addAddress" required="">
+                                </div>
+
+                                <br>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+                                    <input type="text" class="form-control" name="averageCost" id="addAverageCost"
+                                           placeholder="average cost">
+                                </div>
+
+
+                                <br>
+
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="cashPayment" class="addCashPayment"> <span>cash payment</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="cardPayment" class="addCardPayment"> <span>card payment</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="takeoutAvailable" class="addTakeoutAvailable">
+                                        <span>takeout available</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="outdoorSeating" class="addOutdoorSeating"> <span>outdoor seating</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="hookah" class="addHookah"> <span>hookah</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="smokingArea" class="addSmokingArea"> <span>smoking area</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="wifiAvailable" class="addWifiAvailable"> <span>wifi available</span>
+                                    </label>
+                                </div>
+
+                                <br>
+                                <br>
+
+                                <button type="submit" class="btn btn-success btn-lg float-right" id="addBtn">Do it !
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br><br><br>
+            <hr>
+            <br><br><br>
+
+            <div class="row">
+                <div class="offset-md-2 col-md-8 offset-md-2">
+                    <span class="anchor" id="updateRestaurant"></span>
+
+                    <div class="card card-outline-secondary">
+
+                        <div class="card-header">
+                            <h3 class="mb-0">Update Restaurant</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <form class="form" role="form" autocomplete="off" id="updateRestaurantForm" novalidate=""
+                                  method="POST" action="/update">
+
+
+                                <div class="form-group">
+                                    <label for="updateDocId">Document Id</label>
+                                    <input type="text" class="form-control" name="docId" id="updateDocId" required="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="updateName">Name</label>
+                                    <input type="text" class="form-control" name="name" id="updateName" required="">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="updateCity">City</label>
+                                    <input type="text" class="form-control" name="city" id="updateCity" required="">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="updateCountry">Country</label>
+                                    <input type="text" class="form-control" name="country" id="updateCountry"
+                                           required="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="updateRate">Rate</label>
+                                    <input type="text" class="form-control" name="rate" id="updateRate"
+                                           required="">
+                                </div>
+
+
+                                <br>
+
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Cuisine Type:</label>
+                                    <div class="col-lg-9">
+                                        <select id="updateCuisine" class="form-control" name="cuisine" size="0">
+                                            <option value="kebab">Kebab</option>
+                                            <option value="fastFood">Fast Food</option>
+                                            <option value="chinese">Chinese</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <br>
+
+
+                                <div class="form-group">
+                                    <label for="updatePhone">Phone Number</label>
+                                    <input type="text" class="form-control" name="phone" id="updatePhone" required="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="updateAddress">Address</label>
+                                    <input type="text" class="form-control" name="address" id="updateAddress"
+                                           required="">
+                                </div>
+
+                                <br>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+                                    <input type="text" class="form-control" name="averageCost" id="updateAverageCost"
+                                           placeholder="average cost">
+                                </div>
+
+
+                                <br>
+
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="cashPayment" class="updateCashPayment"> <span>cash payment</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="cardPayment" class="updateCardPayment"> <span>card payment</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="takeoutAvailable" class="updateTakeoutAvailable">
+                                        <span>takeout available</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="outdoorSeating" class="updateOutdoorSeating">
+                                        <span>outdoor seating</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="hookah" class="updateHookah"> <span>hookah</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="smokingArea" class="updateSmokingArea"> <span>smoking area</span>
+                                    </label>
+                                </div>
+
+                                <br>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="wifiAvailable" class="updateWifiAvailable"> <span>wifi available</span>
+                                    </label>
+                                </div>
+
+                                <br>
+                                <br>
+
+                                <button type="submit" class="btn btn-success btn-lg float-right" id="updateBtn">Do it
+                                    !
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <br><br><br>
+            <hr>
+            <br><br><br>
+
+            <div class="row">
+                <div class="offset-md-2 col-md-8 offset-md-2">
+                    <span class="anchor" id="deleteRestaurant"></span>
+
+                    <div class="card card-outline-secondary">
+
+                        <div class="card-header">
+                            <h3 class="mb-0">Delete Restaurant</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <form class="form" role="form" autocomplete="off" id="deleteRestaurantForm" novalidate=""
+                                  method="POST" action="/delete">
+
+
+                                <div class="form-group">
+                                    <label for="deleteDocId">Document Id</label>
+                                    <input type="text" class="form-control" name="docId" id="deleteDocId" required="">
+                                </div>
+
+                                <br>
+                                <br>
+
+                                <button type="submit" class="btn btn-success btn-lg float-right" id="deleteBtn">Do it
+                                    !
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <br><br><br>
+            <hr>
+            <br><br><br>
+
+            <div class="row">
+                <div class="offset-md-2 col-md-8 offset-md-2">
+                    <span class="anchor" id="searchRestaurant"></span>
+
+                    <div class="card card-outline-secondary">
+
+                        <div class="card-header">
+                            <h3 class="mb-0">Search Restaurant</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <form class="form" role="form" autocomplete="off" id="searchRestaurantForm" novalidate=""
+                                  method="POST" action="/search">
+
+
+                                <div class="form-group">
+                                    <label for="searchName">Name</label>
+                                    <input type="text" class="form-control" name="name" id="searchName" required="">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="searchCity">City</label>
+                                    <input type="text" class="form-control" name="city" id="searchCity" required="">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="searchCountry">Country</label>
+                                    <input type="text" class="form-control" name="country" id="searchCountry"
+                                           required="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="searchRate">Rate</label>
+                                    <input type="text" class="form-control" name="rate" id="searchRate"
+                                           required="">
+                                </div>
+
+                                <br>
+
+                                <div class="form-group">
+                                    <label for="searchAddress">Address</label>
+                                    <input type="text" class="form-control" name="address" id="searchAddress"
+                                           required="">
+                                </div>
+
+                                <br>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text">$</span></div>
+                                    <input type="text" class="form-control" name="averageCost" id="searchAverageCost"
+                                           placeholder="average cost">
+                                </div>
+
+                                <br>
+
+
+                                <br>
+                                <br>
+
+                                <button type="submit" class="btn btn-success btn-lg float-right" id="searchBtn">Do it
+                                    !
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <br><br><br>
+    <hr>
+    <br><br><br>
+    <p class="text-center">The End.<br></p>
+</div>
+
+</body>
+</html>
